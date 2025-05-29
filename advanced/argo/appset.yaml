@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo
         revision: HEAD
         directories:
-          - path: envs/*
+          - path: advanced/envs/*
   template:
     metadata:
       name: guestbook-{{path.basename}}
