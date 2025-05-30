@@ -111,3 +111,8 @@ spec:
       sources:
         stages:
           - cert
+  promotionTemplate:
+    spec:
+      steps:
+        - task:
+            name: promote
