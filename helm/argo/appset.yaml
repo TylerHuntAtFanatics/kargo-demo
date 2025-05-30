@@ -9,7 +9,7 @@ spec:
         repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo.git
         revision: HEAD
         directories:
-          - path: helm/env/*
+          - path: helm/envs/*
   template:
     metadata:
       name: kargo-helm-{{path.basename}}
@@ -25,5 +25,5 @@ spec:
         repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo.git
         helm:
           valueFiles:
-            - '/helm/env/{{path.basename}}/values.yaml'
-            - '/helm/env/{{path.basename}}/feature-flags.yaml'
+            - '/helm/envs/{{path.basename}}/values.yaml'
+            - '/helm/envs/{{path.basename}}/feature-flags.yaml'
