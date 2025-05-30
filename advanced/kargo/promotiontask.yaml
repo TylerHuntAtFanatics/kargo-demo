@@ -11,16 +11,18 @@ spec:
       value: main
     - name: image
       value: ghcr.io/tylerhuntatfanatics/guestbook
+    - name: envs_dirctory
+      value: advanced/envs
   steps:
     # Clone the Git repository that contains the Kustomize configuration
-    # to the ./src directory, and the envsironment configuration to ./out.
+    # to the ./src directory, and the environment configuration to ./out.
     - uses: git-clone
       config:
         repoURL: ${{ vars.repoURL }}
         checkout:
           - commit: ${{ commitFrom(vars.repoURL).ID }}
             path: ./src
-          - branch: envs/${{ ctx.stage }}
+          - branch: stage/${{ ctx.stage }}
             path: ./out
             # Create the branch if it does not exist.
             create: true
@@ -31,20 +33,20 @@ spec:
     - uses: git-clear
       config:
         path: ./out
-    # Update the image in the Kustomize configuration located at ./src/envs/<stage>
+    # Update the image in the Kustomize configuration located at ./src/${{ vars.envs_dir }}/<stage>
     # in the repository.
     - uses: kustomize-set-image
       as: update-image
       config:
-        path: ./src/envs/${{ ctx.stage }}
+        path: ./src/${{ vars.envs_dir }}/${{ ctx.stage }}
         images:
           - image: ${{ vars.image }}
             tag: ${{ imageFrom(vars.image).Tag}}
-    # Build the Kustomize configuration in the ./src directory using the envs/<stage>
+    # Build the Kustomize configuration in the ./src directory using the ${{ vars.envs_dir }}/<stage>
     # overlay to the ./out directory.
     - uses: kustomize-build
       config:
-        path: ./src/envs/${{ ctx.stage }}
+        path: ./src/${{ vars.envs_dir }}/${{ ctx.stage }}
         outPath: ./out
     # Commit the changes to the Git repository.
     - uses: git-commit
