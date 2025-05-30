@@ -6,7 +6,7 @@ metadata:
 spec:
   subscriptions:
     - image:
-        repoURL: ghcr.io/TylerHuntAtFanatics/guestbook
+        repoURL: ghcr.io/tylerhuntatfanatics/guestbook
         imageSelectionStrategy: SemVer
         allowTags: ^v?[0-9]+\.[0-9]+\.[0-9]+([\+-].*)?$
     - git:
