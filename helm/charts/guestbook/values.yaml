@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/tylerhntatfanatics/guestbook
+  repository: ghcr.io/tylerhuntatfanatics/guestbook
   pullPolicy: IfNotPresent
   tag: latest
 
