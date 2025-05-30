@@ -22,7 +22,7 @@ spec:
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: staging
+  name: test
   namespace: kargo-advanced
   annotations:
     kargo.akuity.io/color: amber
@@ -44,7 +44,7 @@ spec:
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: ab-test-a
+  name: cert
   namespace: kargo-advanced
   annotations:
     kargo.akuity.io/color: yellow
@@ -55,7 +55,7 @@ spec:
         name: guestbook
       sources:
         stages:
-          - staging
+          - test
   promotionTemplate:
     spec:
       steps:
@@ -71,7 +71,7 @@ spec:
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: ab-test-b
+  name: inf-dev
   namespace: kargo-advanced
   annotations:
     kargo.akuity.io/color: green
@@ -82,7 +82,7 @@ spec:
         name: guestbook
       sources:
         stages:
-          - staging
+          - test
   promotionTemplate:
     spec:
       steps:
@@ -110,70 +110,4 @@ spec:
         name: guestbook
       sources:
         stages:
-          - ab-test-a
-          - ab-test-b
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Stage
-metadata:
-  name: prod-west
-  namespace: kargo-advanced
-  annotations:
-    kargo.akuity.io/color: violet
-spec:
-  requestedFreight:
-    - origin:
-        kind: Warehouse
-        name: guestbook
-      sources:
-        stages:
-          - prod
-  promotionTemplate:
-    spec:
-      steps:
-        - task:
-            name: promote
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Stage
-metadata:
-  name: prod-central
-  namespace: kargo-advanced
-  annotations:
-    kargo.akuity.io/color: violet
-spec:
-  requestedFreight:
-    - origin:
-        kind: Warehouse
-        name: guestbook
-      sources:
-        stages:
-          - prod
-  promotionTemplate:
-    spec:
-      steps:
-        - task:
-            name: promote
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Stage
-metadata:
-  name: prod-east
-  namespace: kargo-advanced
-  annotations:
-    kargo.akuity.io/color: violet
-spec:
-  requestedFreight:
-    - origin:
-        kind: Warehouse
-        name: guestbook
-      sources:
-        stages:
-          - prod
-  promotionTemplate:
-    spec:
-      steps:
-        - task:
-            name: promote
+          - cert
