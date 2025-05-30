@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kargo-helm
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo.git
+        revision: HEAD
+        directories:
+          - path: helm/env/*
+  template:
+    metadata:
+      name: kargo-helm-{{path.basename}}
+      annotations:
+        kargo.akuity.io/authorized-stage: kargo-helm:{{path.basename}}
+    spec:
+      destination:
+        namespace: kargo-helm-{{path.basename}}
+        name: demo
+      project: kargo-helm
+      source:
+        path: helm/charts/guestbook
+        repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo.git
+        helm:
+          valueFiles:
+            - '/helm/env/{{path.basename}}/values.yaml'
+            - '/helm/env/{{path.basename}}/feature-flags.yaml'
