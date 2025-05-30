@@ -11,8 +11,8 @@ spec:
       value: main
     - name: image
       value: ghcr.io/tylerhuntatfanatics/guestbook
-    - name: envs_dirctory
-      value: advanced/envs
+    - name: envs_dir
+      value: 'advanced/envs'
   steps:
     # Clone the Git repository that contains the Kustomize configuration
     # to the ./src directory, and the environment configuration to ./out.
