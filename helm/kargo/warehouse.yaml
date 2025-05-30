@@ -8,11 +8,6 @@ spec:
     - image:
         repoURL: ghcr.io/tylerhuntatfanatics/guestbook
         imageSelectionStrategy: SemVer
-    # - git:
-    #     branch: main
-    #     # commitSelectionStrategy: NewestFromBranch
-    #     # discoveryLimit: 20
-    #     repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo.git
 
 ---
 apiVersion: kargo.akuity.io/v1alpha1
