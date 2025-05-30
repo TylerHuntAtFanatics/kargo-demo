@@ -25,4 +25,4 @@ spec:
       source:
         path: ./
         repoURL: https://github.com/TylerHuntAtFanatics/kargo-demo
-        targetRevision: env/{{path.basename}}
+        targetRevision: stage/{{path.basename}}
